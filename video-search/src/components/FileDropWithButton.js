@@ -7,9 +7,8 @@ class FileDropWithButton extends Component
     {
         super()
         this.state = {
-            buttonDisabled: true,
-            uploadedFile: null,
-            state: ""
+            buttonDisabled: true, // is continue button disabled
+            uploadedFile: null, // the uploaded file from the dragNdrop
         }
     }
 

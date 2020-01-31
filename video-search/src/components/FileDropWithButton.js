@@ -14,11 +14,8 @@ class FileDropWithButton extends Component
     }
 
     buttonClicked() {
-        // CHANGE THIS
-        this.setState({
-            buttonDisabled: true,
-        }, 
-        () => {alert('Continue button has been pressed')}) // callback
+        // once continue button is clicked update to new page
+        this.props.updateNextPage();
     }
 
     fileUploadSuceed(file) {

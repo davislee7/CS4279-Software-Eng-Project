@@ -1,31 +1,71 @@
-import React from 'react';
+import React, { Component } from 'react'
 import './App.css';
 // import FunctComp from './components/FunctComp'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from 'react-bootstrap';
 import FileDropWithButton from './components/FileDropWithButton'
 
-// this is the audio file uploaded
-var file;
+class App extends Component {
 
-// sets the file to the file successfully uploaded
-// (this method is called in the FileDropWithButton component)
-function setFile(newFile) {
-  file = newFile;
-}
+  constructor()
+  {
+      super()
+      this.state = {
+          file: null, // this is the audio file uploaded
+          nextPage: false, // if the 2nd page should be displayed
+      }
 
-function App() {
-  return (
-    <div className="App">
-      <section>
-        <h1>Video-Search</h1>
-      </section>
+      this.setFile = this.setFile.bind(this);
+      this.updateNextPageTrue = this.updateNextPageTrue.bind(this);
+  }
 
-      <section>
-        <FileDropWithButton updateFile={setFile}/>
-      </section>
-    </div>
-  );
+  // set file
+  setFile(newFile) {
+    this.setState({
+      file: newFile
+    })
+  }
+
+  // set nextPage to true (display new page)
+  updateNextPageTrue() {
+    this.setState({
+      nextPage: true
+    })
+  }
+
+  render()
+  {
+    // displaying 2nd page
+    if(this.state.nextPage)
+    {
+      return (
+        <div className="App">
+        <section>
+          <h1>Video-Search</h1>
+        </section>
+  
+        <section>
+          <h1 style={{color: 'blue'}}>This is the next page!</h1>
+        </section>
+      </div>
+      );
+    }
+    // displaying 1st page
+    else
+    {
+      return (
+        <div className="App">
+          <section>
+            <h1>Video-Search</h1>
+          </section>
+    
+          <section>
+            <FileDropWithButton updateFile={this.setFile} updateNextPage={this.updateNextPageTrue}/>
+          </section>
+        </div>
+      );
+    }
+  }
 }
 
 export default App;

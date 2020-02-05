@@ -41,7 +41,7 @@ class App extends Component {
       return (
         <div className="App">
         <section>
-          <h1>Video-Search</h1>
+          <h1 style={{fontSize: '36px'}}>Video-Search</h1>
         </section>
   
         <section>
@@ -56,7 +56,7 @@ class App extends Component {
       return (
         <div className="App">
           <section>
-            <h1>Video-Search</h1>
+            <h1 style={{fontSize: '36px'}}>Video-Search</h1>
           </section>
     
           <section>

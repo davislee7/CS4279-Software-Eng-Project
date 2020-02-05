@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
+import './Styles.css'
 
 class FileDropWithButton extends Component
 {
@@ -41,17 +42,17 @@ class FileDropWithButton extends Component
     render()
     {
         return (
-            <div>
-                <section>
+            <div >
+                <section style={{display: 'flex',  justifyContent: 'center', alignItems: 'center'}}>
                     <Dropzone 
                         onDropAccepted={acceptedFiles => this.fileUploadSuceed(acceptedFiles)}
                         onDropRejected={() => this.fileUploadFailed()}
                         accept={'audio/x-m4a' || 'audio/mp3' || 'audio/wav'}>
                     {({getRootProps, getInputProps}) => (
                         <section>
-                        <div {...getRootProps()}>
+                        <div {...getRootProps()} >
                             <input {...getInputProps()} />
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <p className='dropZone'>Drag 'n' drop some files here, or click to select files</p>
                         </div>
                         </section>
                     )}
@@ -59,14 +60,14 @@ class FileDropWithButton extends Component
                 </section>
 
                 <section>
-                    {this.state.message === "Success" ? <p style={{color: 'green'}}>You have successfully uploaded an audio file!</p>
-                        : this.state.message === "Failed" ? <p style={{color: 'red'}}>File has failed to upload (Must be an audio file)</p> 
-                        : <p style={{color: 'white'}}>.</p>}
+                    {this.state.message === "Success" ? <p style={{color: 'green', fontSize: '20px'}}>You have successfully uploaded an audio file!</p>
+                        : this.state.message === "Failed" ? <p style={{color: 'red', fontSize: '20px'}}>File has failed to upload (Must be an audio file)</p> 
+                        : <p style={{color: 'white', fontSize: '20px'}}>.</p>}
                 </section>
 
                 <section>
                     <button 
-                        style={{color: 'white', backgroundColor: this.state.buttonDisabled ? 'grey' : 'green'}}
+                        style={{color: 'white', width: '150px', height: '25px',backgroundColor: this.state.buttonDisabled ? 'grey' : 'green'}}
                         disabled={this.state.buttonDisabled}
                         onClick={() => this.buttonClicked()}>Continue</button>
                 </section>

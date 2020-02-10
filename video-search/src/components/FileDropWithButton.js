@@ -47,7 +47,7 @@ class FileDropWithButton extends Component
                     <Dropzone 
                         onDropAccepted={acceptedFiles => this.fileUploadSuceed(acceptedFiles)}
                         onDropRejected={() => this.fileUploadFailed()}
-                        accept={'audio/x-m4a' || 'audio/mp3' || 'audio/wav'}>
+                        accept={['audio/x-m4a', 'audio/mp3', 'audio/wav']}>
                     {({getRootProps, getInputProps}) => (
                         <section>
                         <div {...getRootProps()} >

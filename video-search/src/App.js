@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
+import AudioPlayer from 'react-h5-audio-player';
+import 'react-h5-audio-player/lib/styles.css';
 // import FunctComp from './components/FunctComp'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from 'react-bootstrap';
@@ -41,13 +43,20 @@ class App extends Component {
       return (
         <div className="App">
         <section>
-          <h1 style={{fontSize: '48px'}}>Video-Search</h1>
+          <h1 style={{fontSize: '48px'}}>TranScrybe</h1>
         </section>
 
         <section>
           <input type="text"
           style={{height: "5vh", fontSize: '24px'}}
           placeholder="Search.."></input>
+        </section>
+        <section style={{marginTop: "25px"}}>
+          <AudioPlayer
+          autoPlay
+          style={{width: "50vw", margin: "auto"}}
+          src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
+          onPlay={e => console.log("onPlay")}/>
         </section>
       </div>
       );
@@ -58,7 +67,7 @@ class App extends Component {
       return (
         <div className="App">
           <section>
-            <h1 style={{fontSize: '48px'}}>Video-Search</h1>
+            <h1 style={{fontSize: '48px'}}>TranScrybe</h1>
           </section>
     
           <section>

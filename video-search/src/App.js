@@ -41,7 +41,7 @@ class App extends Component {
     if(this.state.nextPage)
     {
       return (
-        <div className="App">
+        <div className="App" style={{backgroundColor: "#e6ffe6", height: '100vh'}}>
         <section>
           <img
           src="logo.png"></img>
@@ -66,7 +66,7 @@ class App extends Component {
     else
     {
       return (
-        <div className="App">
+        <div className="App" style={{backgroundColor: "#e6ffe6", height: '100vh'}}>
           <section>
           <img
           src="logo.png"></img>

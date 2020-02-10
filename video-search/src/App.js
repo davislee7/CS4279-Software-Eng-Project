@@ -47,14 +47,13 @@ class App extends Component {
           src="logo.png"></img>
         </section>
 
-        <section>
+        <section style={{marginTop: "25px"}}>
           <input type="text"
           style={{height: "5vh", fontSize: '24px'}}
           placeholder="Search.."></input>
         </section>
         <section style={{marginTop: "25px"}}>
           <AudioPlayer
-          autoPlay
           style={{width: "50vw", margin: "auto"}}
           src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
           onPlay={e => console.log("onPlay")}/>

@@ -43,7 +43,8 @@ class App extends Component {
       return (
         <div className="App">
         <section>
-          <h1 style={{fontSize: '48px'}}>TranScrybe</h1>
+          <img
+          src="logo.png"></img>
         </section>
 
         <section>
@@ -67,7 +68,8 @@ class App extends Component {
       return (
         <div className="App">
           <section>
-            <h1 style={{fontSize: '48px'}}>TranScrybe</h1>
+          <img
+          src="logo.png"></img>
           </section>
     
           <section>

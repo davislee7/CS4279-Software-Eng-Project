@@ -41,11 +41,13 @@ class App extends Component {
       return (
         <div className="App">
         <section>
-          <h1 style={{fontSize: '36px'}}>Video-Search</h1>
+          <h1 style={{fontSize: '48px'}}>Video-Search</h1>
         </section>
-  
+
         <section>
-          <h1 style={{color: 'blue'}}>This is the next page!</h1>
+          <input type="text"
+          style={{height: "5vh", fontSize: '24px'}}
+          placeholder="Search.."></input>
         </section>
       </div>
       );
@@ -56,7 +58,7 @@ class App extends Component {
       return (
         <div className="App">
           <section>
-            <h1 style={{fontSize: '36px'}}>Video-Search</h1>
+            <h1 style={{fontSize: '48px'}}>Video-Search</h1>
           </section>
     
           <section>

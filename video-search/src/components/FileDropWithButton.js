@@ -43,7 +43,7 @@ class FileDropWithButton extends Component
     {
         return (
             <div >
-                <section style={{display: 'flex',  justifyContent: 'center', alignItems: 'center'}}>
+                <section style={{display: 'flex',  justifyContent: 'center', alignItems: 'center', borderRadius: '25px'}}>
                     <Dropzone 
                         onDropAccepted={acceptedFiles => this.fileUploadSuceed(acceptedFiles)}
                         onDropRejected={() => this.fileUploadFailed()}

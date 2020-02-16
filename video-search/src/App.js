@@ -15,10 +15,12 @@ class App extends Component {
       this.state = {
           file: null, // this is the audio file uploaded
           nextPage: false, // if the 2nd page should be displayed
+          keyword: '', // keyword searched
       }
 
       this.setFile = this.setFile.bind(this);
       this.updateNextPageTrue = this.updateNextPageTrue.bind(this);
+      this.changeKeyword = this.changeKeyword.bind(this);
   }
 
   // set file
@@ -35,6 +37,16 @@ class App extends Component {
     })
   }
 
+  // sets keyword upon pressing enter
+  changeKeyword(event) {
+    if(event.key === 'Enter'){
+      this.setState({
+        keyword: event.target.value
+      },
+      () => {console.log(this.state.keyword)})
+    }
+  }
+
   render()
   {
     // displaying 2nd page
@@ -49,12 +61,15 @@ class App extends Component {
 
         <section style={{marginTop: "25px"}}>
           <input type="text"
-          style={{height: "5vh", fontSize: '24px'}}
-          placeholder="Search.."></input>
+          style={{height: "5vh", fontSize: '24px', borderRadius: '25px', paddingLeft: '25px', paddingRight: '25px'}}
+          placeholder="Search..."
+          onKeyPress={this.changeKeyword}></input>
         </section>
+
         <section style={{marginTop: "25px"}}>
           <AudioPlayer
-          style={{width: "50vw", margin: "auto"}}
+          fullPlayer
+          style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
           src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
           onPlay={e => console.log("onPlay")}/>
         </section>

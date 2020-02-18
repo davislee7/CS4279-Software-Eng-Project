@@ -43,11 +43,11 @@ class FileDropWithButton extends Component
     {
         return (
             <div >
-                <section style={{display: 'flex',  justifyContent: 'center', alignItems: 'center', borderRadius: '25px'}}>
+                <section style={{display: 'flex',  justifyContent: 'center', alignItems: 'center'}}>
                     <Dropzone 
                         onDropAccepted={acceptedFiles => this.fileUploadSuceed(acceptedFiles)}
                         onDropRejected={() => this.fileUploadFailed()}
-                        accept={['audio/x-m4a', 'audio/mp3', 'audio/wav']}>
+                        accept={['audio/x-m4a', 'audio/mp3', 'audio/wav', 'video/wmv', 'video/mov', 'video/avi']}>
                     {({getRootProps, getInputProps}) => (
                         <section>
                         <div {...getRootProps()} >

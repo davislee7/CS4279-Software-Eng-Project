@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import AudioPlayer from 'react-h5-audio-player';
+import ReactPlayer from 'react-player'
 import 'react-h5-audio-player/lib/styles.css';
 // import FunctComp from './components/FunctComp'
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +17,7 @@ class App extends Component {
           file: null, // this is the audio file uploaded
           nextPage: false, // if the 2nd page should be displayed
           keyword: '', // keyword searched
+          audioFile: true, // if it is an audio file or not
       }
 
       this.setFile = this.setFile.bind(this);
@@ -28,6 +30,8 @@ class App extends Component {
     this.setState({
       file: newFile
     })
+
+    console.log(newFile[0].type);
   }
 
   // set nextPage to true (display new page)
@@ -72,6 +76,10 @@ class App extends Component {
           style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
           src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
           onPlay={e => console.log("onPlay")}/>
+        </section>
+
+        <section style={{marginTop: "25px"}}>
+          <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U'/>
         </section>
       </div>
       );

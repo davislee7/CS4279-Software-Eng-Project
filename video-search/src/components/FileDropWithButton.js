@@ -47,7 +47,7 @@ class FileDropWithButton extends Component
                     <Dropzone 
                         onDropAccepted={acceptedFiles => this.fileUploadSuceed(acceptedFiles)}
                         onDropRejected={() => this.fileUploadFailed()}
-                        accept={['audio/x-m4a', 'audio/mp3', 'audio/wav', 'video/wmv', 'video/mov', 'video/avi']}>
+                        accept={['audio/x-m4a', 'audio/mp3', 'video/x-ms-wmv', 'video/mov', 'video/avi']}>
                     {({getRootProps, getInputProps}) => (
                         <section>
                         <div {...getRootProps()} >
@@ -60,8 +60,8 @@ class FileDropWithButton extends Component
                 </section>
 
                 <section>
-                    {this.state.message === "Success" ? <p style={{color: 'green', fontSize: '20px'}}>You have successfully uploaded an audio file!</p>
-                        : this.state.message === "Failed" ? <p style={{color: 'red', fontSize: '20px'}}>File has failed to upload (Must be an audio file)</p> 
+                    {this.state.message === "Success" ? <p style={{color: 'green', fontSize: '20px'}}>You have successfully uploaded an audio/video file!</p>
+                        : this.state.message === "Failed" ? <p style={{color: 'red', fontSize: '20px'}}>File has failed to upload (Must be an audio/video file)</p> 
                         : <p style={{color: 'white', fontSize: '20px'}}>.</p>}
                 </section>
 

@@ -32,6 +32,12 @@ class App extends Component {
     })
 
     console.log(newFile[0].type);
+
+    if(newFile[0].type == 'video/x-ms-wmv' || newFile[0].type == 'video/mov' || newFile[0].type == 'video/avi') {
+      this.setState({
+        audioFile: false
+      })
+    }
   }
 
   // set nextPage to true (display new page)
@@ -70,17 +76,21 @@ class App extends Component {
           onKeyPress={this.changeKeyword}></input>
         </section>
 
-        <section style={{marginTop: "25px"}}>
-          <AudioPlayer
-          fullPlayer
-          style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
-          src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
-          onPlay={e => console.log("onPlay")}/>
-        </section>
-
-        <section style={{marginTop: "25px"}}>
-          <ReactPlayer url='https://www.youtube.com/watch?v=ysz5S6PUM-U'/>
-        </section>
+        {this.state.audioFile == true ? (
+          <section style={{marginTop: "25px"}}>
+            <AudioPlayer
+            fullPlayer
+            style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
+            src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
+            onPlay={e => console.log("onPlay")}/>
+          </section>
+        ) : (
+          <section style={{marginTop: "25px"}}>
+            <ReactPlayer 
+            url='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+            style={{margin: "auto"}}/>
+          </section>
+        )}
       </div>
       );
     }

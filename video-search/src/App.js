@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import ReactPlayer from 'react-player'
 // import FunctComp from './components/FunctComp'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from 'react-bootstrap';
@@ -72,6 +73,13 @@ class App extends Component {
           style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
           src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
           onPlay={e => console.log("onPlay")}/>
+        </section>
+
+        <section style={{marginTop: "25px"}}>
+          <ReactPlayer
+          style={{margin: "auto"}}
+          url="https://youtu.be/dQw4w9WgXcQ">
+          </ReactPlayer>
         </section>
       </div>
       );

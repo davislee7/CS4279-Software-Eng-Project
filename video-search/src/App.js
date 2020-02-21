@@ -3,7 +3,7 @@ import './App.css';
 import AudioPlayer from 'react-h5-audio-player';
 import ReactPlayer from 'react-player'
 import 'react-h5-audio-player/lib/styles.css';
-// import FunctComp from './components/FunctComp'
+import TranscriptTextBox from './components/TranscriptTextBox'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from 'react-bootstrap';
 import FileDropWithButton from './components/FileDropWithButton'
@@ -33,6 +33,7 @@ class App extends Component {
 
     console.log(newFile[0].type);
 
+    // if file uploaded is a video file then update audioFile state
     if(newFile[0].type == 'video/x-ms-wmv' || newFile[0].type == 'video/mov' || newFile[0].type == 'video/avi') {
       this.setState({
         audioFile: false
@@ -91,6 +92,11 @@ class App extends Component {
             style={{margin: "auto"}}/>
           </section>
         )}
+
+        <section style={{marginTop: "25px"}}>
+          <h1>Transcript</h1>
+          <TranscriptTextBox/>
+        </section>
       </div>
       );
     }

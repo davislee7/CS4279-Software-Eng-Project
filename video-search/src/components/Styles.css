@@ -8,3 +8,8 @@
     font-size: 18px;
     border-radius: '30px'
 }
+
+.transcript {
+    overflow-y: scroll !important;
+    height: 500px !important;
+}

@@ -1,6 +1,17 @@
 import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
-import './Styles.css'
+import styled from "styled-components"
+
+const CustomDropzone = styled.p`
+    background-color: #F5F5F5;
+    color: gray;
+    width: 800px;
+    height: 200px;
+    border-style: dashed;
+    line-height: 200px;
+    font-size: 18px;
+    border-radius: '30px'
+`
 
 class FileDropWithButton extends Component
 {
@@ -52,7 +63,7 @@ class FileDropWithButton extends Component
                         <section>
                         <div {...getRootProps()} >
                             <input {...getInputProps()} />
-                            <p className='dropZone'>Drag 'n' drop some files here, or click to select files</p>
+                            <CustomDropzone>Drag 'n' drop some files here, or click to select files</CustomDropzone>
                         </div>
                         </section>
                     )}

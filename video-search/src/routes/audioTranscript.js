@@ -9,7 +9,7 @@ const TranscriptBase = styled.div`
     height: 100vh;
 `
 
-export default class Transcript extends Component {
+export default class AudioTranscript extends Component {
 
     constructor(props) {
         super(props)
@@ -30,6 +30,7 @@ export default class Transcript extends Component {
      }
 
     render() {
+        console.log("RENDER")
         return (
             <TranscriptBase>
                 <section>
@@ -50,6 +51,7 @@ export default class Transcript extends Component {
                     src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
                     onPlay={e => console.log("onPlay")}/>
                 </section>
+
             </TranscriptBase>
         )
     }

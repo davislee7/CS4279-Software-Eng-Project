@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import styled from "styled-components"
 import FileDropWithButton from "../components/FileDropWithButton"
 
-
 const UploadBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
@@ -30,7 +29,11 @@ export default class Upload extends Component {
 
     // set nextPage to true (display new page)
     pushToNextPage() {
-        this.props.history.push("/transcript")
+        if (this.state.file[0].type === "audio/mp3") {
+            this.props.history.push("/audio")
+        } else {
+            this.props.history.push("/video")
+        }
     }
 
     render() {

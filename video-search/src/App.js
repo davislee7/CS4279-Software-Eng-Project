@@ -4,6 +4,8 @@ import AudioPlayer from 'react-h5-audio-player';
 import ReactPlayer from 'react-player'
 import 'react-h5-audio-player/lib/styles.css';
 import TranscriptTextBox from './components/TranscriptTextBox'
+import ReactPlayer from 'react-player'
+// import FunctComp from './components/FunctComp'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Button } from 'react-bootstrap';
 import FileDropWithButton from './components/FileDropWithButton'
@@ -96,6 +98,13 @@ class App extends Component {
         <section style={{marginTop: "25px"}}>
           <h1>Transcript</h1>
           <TranscriptTextBox/>
+        </section>
+
+        <section style={{marginTop: "25px"}}>
+          <ReactPlayer
+          style={{margin: "auto"}}
+          url="https://youtu.be/dQw4w9WgXcQ">
+          </ReactPlayer>
         </section>
       </div>
       );

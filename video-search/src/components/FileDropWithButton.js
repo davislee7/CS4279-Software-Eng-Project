@@ -4,13 +4,12 @@ import styled from "styled-components"
 
 const CustomDropzone = styled.p`
     background-color: #F5F5F5;
-    color: gray;
-    width: 800px;
+    min-width: 70vw;
     height: 200px;
-    border-style: dashed;
     line-height: 200px;
     font-size: 18px;
-    border-radius: '30px'
+    border: 1.5px dashed gray;
+    border-radius: 30px
 `
 
 class FileDropWithButton extends Component

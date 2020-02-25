@@ -9,6 +9,11 @@ const TranscriptBase = styled.div`
     height: 100vh;
 `
 
+const Space = styled.div`
+    height: 25px;
+    display: block;
+`
+
 export default class VideoTranscript extends Component {
 
     constructor(props) {
@@ -35,15 +40,15 @@ export default class VideoTranscript extends Component {
                 <section>
                     <img src="logo.png"></img>
                 </section>
-
-                <section style={{marginTop: "25px"}}>
+                <Space></Space>
+                <section>
                     <input type="text"
                     style={{height: "5vh", fontSize: '24px', borderRadius: '25px', paddingLeft: '25px', paddingRight: '25px'}}
                     placeholder="Search..."
                     onKeyPress={this.changeKeyword}></input>
                 </section>
-                
-                <section style={{marginTop: "25px"}}>
+                <Space></Space>
+                <section>
                     <ReactPlayer
                     style={{margin: "auto"}}
                     url="https://youtu.be/dQw4w9WgXcQ">

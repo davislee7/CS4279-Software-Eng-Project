@@ -71,8 +71,8 @@ class FileDropWithButton extends Component
                 </section>
 
                 <section>
-                    {this.state.message === "Success" ? <p style={{color: 'green', fontSize: '20px'}}>You have successfully uploaded an audio file!</p>
-                        : this.state.message === "Failed" ? <p style={{color: 'red', fontSize: '20px'}}>File has failed to upload (Must be an audio file)</p> 
+                    {this.state.message === "Success" ? <p style={{color: 'green', fontSize: '20px'}}>You have successfully uploaded a file!</p>
+                        : this.state.message === "Failed" ? <p style={{color: 'red', fontSize: '20px'}}>File has failed to upload (Must be an audio or video file)</p> 
                         : <p style={{color: 'white', fontSize: '20px'}}>.</p>}
                 </section>
 

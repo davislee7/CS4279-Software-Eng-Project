@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import styled from "styled-components"
 import ReactPlayer from 'react-player'
-import 'react-h5-audio-player/lib/styles.css';
+import TranscriptTextBox from '../components/TranscriptTextBox'
+import Logo from "../components/Logo"
 
 const TranscriptBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
-    height: 100vh;
+    height: auto;
 `
 
 const Space = styled.div`
@@ -18,8 +19,10 @@ export default class VideoTranscript extends Component {
 
     constructor(props) {
         super(props)
+        this.vidPlayer = null;
         this.state = {
-            keyword: '', // keyword searched
+            keyword: '', // keyword searche
+            playing: false
         }
         this.changeKeyword = this.changeKeyword.bind(this);
     }
@@ -31,15 +34,25 @@ export default class VideoTranscript extends Component {
             }, () => {
                 console.log(this.state.keyword)
             })
+            if(this.state.keyword.match("demo test")){
+                if (this.player) {
+                    this.player.seekTo(45, "seconds")
+                    this.setState({
+                        playing: true
+                    })
+                }
+            }
         }
      }
+
+     ref = player => {
+        this.player = player
+      }
 
     render() {
         return (
             <TranscriptBase>
-                <section>
-                    <img src="logo.png"></img>
-                </section>
+                <Logo></Logo>
                 <Space></Space>
                 <section>
                     <input type="text"
@@ -49,10 +62,16 @@ export default class VideoTranscript extends Component {
                 </section>
                 <Space></Space>
                 <section>
-                    <ReactPlayer
+                    <ReactPlayer ref={this.ref}
+                    playing={this.state.playing}
                     style={{margin: "auto"}}
                     url="https://youtu.be/dQw4w9WgXcQ">
                     </ReactPlayer>
+                </section>
+                <Space></Space>
+                <section>
+                    <h1>Transcript</h1>
+                    <TranscriptTextBox/>
                 </section>
             </TranscriptBase>
         )

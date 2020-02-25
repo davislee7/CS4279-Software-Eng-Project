@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import styled from "styled-components"
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
+import TranscriptTextBox from '../components/TranscriptTextBox'
+import Logo from "../components/Logo"
 
 const TranscriptBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
-    height: 100vh;
+    height: auto;
 `
 
 const Space = styled.div`
@@ -20,6 +22,7 @@ export default class AudioTranscript extends Component {
         super(props)
         this.state = {
             keyword: '', // keyword searched
+            playing: false
         }
         this.changeKeyword = this.changeKeyword.bind(this);
     }
@@ -31,16 +34,27 @@ export default class AudioTranscript extends Component {
             }, () => {
                 console.log(this.state.keyword)
             })
+
+            if(this.state.keyword.match("demo test")){
+                if (this.player) {
+                    this.player.audio.currentTime = 45;
+                    this.setState({
+                        playing: true
+                    })
+                }
+            }
         }
-     }
+    }
+
+    ref = player => {
+        this.player = player
+      }
 
     render() {
         console.log("RENDER")
         return (
             <TranscriptBase>
-                <section>
-                    <img src="logo.png"></img>
-                </section>
+                <Logo></Logo>
                 <Space></Space>
                 <section>
                     <input type="text"
@@ -54,8 +68,16 @@ export default class AudioTranscript extends Component {
                     fullPlayer
                     style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
                     src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
-                    onPlay={e => console.log("onPlay")}/>
+                    onPlay={e => console.log("onPlay")}
+                    ref={this.ref}
+                    playing={this.state.playing}/>
                 </section>
+                <Space></Space>
+                <section>
+                    <h1>Transcript</h1>
+                    <TranscriptTextBox/>
+                </section>
+
 
             </TranscriptBase>
         )

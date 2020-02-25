@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styled from "styled-components"
 import FileDropWithButton from "../components/FileDropWithButton"
+import Logo from "../components/Logo"
 
 const UploadBase = styled.div`
     text-align: center;
@@ -39,9 +40,7 @@ export default class Upload extends Component {
     render() {
         return (
             <UploadBase>
-                <section>
-                    <img src="logo.png"></img>
-                </section>
+                <Logo></Logo>
             
                 <section>
                     <FileDropWithButton updateFile={this.setFile} updateNextPage={this.pushToNextPage}/>

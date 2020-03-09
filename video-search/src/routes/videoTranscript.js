@@ -59,6 +59,7 @@ export default class VideoTranscript extends Component {
                 
                 <section style={{marginTop: "25px"}}>
                     <ReactPlayer ref={this.ref}
+                    controls
                     playing={this.state.playing}
                     style={{margin: "auto"}}
                     url="https://youtu.be/dQw4w9WgXcQ">

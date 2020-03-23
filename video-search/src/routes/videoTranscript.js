@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styled from "styled-components"
 import ReactPlayer from 'react-player'
 import TranscriptTextBox from '../components/TranscriptTextBox'
+import Loader from "react-spinners/ClipLoader";
 
 const TranscriptBase = styled.div`
     text-align: center;
@@ -15,10 +16,12 @@ export default class VideoTranscript extends Component {
         super(props)
         this.vidPlayer = null;
         this.state = {
-            keyword: '', // keyword searche
-            playing: false
+            keyword: '', // keyword search
+            playing: false,
+            loading: true,
         }
         this.changeKeyword = this.changeKeyword.bind(this);
+        this.stopLoadSpinning = this.stopLoadSpinning.bind(this);
     }
 
     changeKeyword(event) {
@@ -37,6 +40,12 @@ export default class VideoTranscript extends Component {
                 }
             }
         }
+     }
+
+     stopLoadSpinning() {
+        this.setState({
+            loading: false
+        });
      }
 
      ref = player => {
@@ -58,18 +67,38 @@ export default class VideoTranscript extends Component {
                 </section>
                 
                 <section style={{marginTop: "25px"}}>
+                    <Loader
+                        size={327}
+                        color={"#006600"}
+                        loading={this.state.loading}
+                    />
+                </section>
+
+                <section style={{marginTop: "25px"}}>
                     <ReactPlayer ref={this.ref}
                     controls
                     playing={this.state.playing}
                     style={{margin: "auto"}}
-                    url="https://youtu.be/dQw4w9WgXcQ">
+                    url="https://youtu.be/dQw4w9WgXcQ"
+                    onReady={this.stopLoadSpinning}
+                    height={this.state.loading ? 0 : undefined}>
                     </ReactPlayer>
                 </section>
 
+                { this.state.loading ? 
+                <section style={{marginTop: "25px"}}>
+                    <Loader
+                        size={327}
+                        color={"#006600"}
+                        loading={this.state.loading}
+                    />
+                </section>
+                :
                 <section style={{marginTop: "25px"}}>
                     <h1>Transcript</h1>
                     <TranscriptTextBox/>
                 </section>
+                }
             </TranscriptBase>
         )
     }

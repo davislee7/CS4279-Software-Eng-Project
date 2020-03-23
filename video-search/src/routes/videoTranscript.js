@@ -4,6 +4,9 @@ import ReactPlayer from 'react-player'
 import TranscriptTextBox from '../components/TranscriptTextBox'
 import Logo from "../components/Logo"
 
+import TranscriptEditor from "@bbc/react-transcript-editor";
+import transcriptJson from "../transcript.json"
+
 const TranscriptBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
@@ -45,9 +48,9 @@ export default class VideoTranscript extends Component {
         }
      }
 
-     ref = player => {
+    ref = player => {
         this.player = player
-      }
+    }
 
     render() {
         return (
@@ -62,16 +65,16 @@ export default class VideoTranscript extends Component {
                 </section>
                 <Space></Space>
                 <section>
-                    <ReactPlayer ref={this.ref}
-                    playing={this.state.playing}
-                    style={{margin: "auto"}}
-                    url="https://youtu.be/dQw4w9WgXcQ">
-                    </ReactPlayer>
                 </section>
                 <Space></Space>
                 <section>
-                    <h1>Transcript</h1>
-                    <TranscriptTextBox/>
+                <TranscriptEditor
+                    transcriptData={transcriptJson}
+                    mediaUrl={"https://download.ted.com/talks/KateDarling_2018S-950k.mp4"}
+                    sttJsonType={"bbckaldi"}
+                    title={"My title"}
+                    mediaType={"video"}
+                    />
                 </section>
             </TranscriptBase>
         )

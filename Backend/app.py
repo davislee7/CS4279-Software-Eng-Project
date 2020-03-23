@@ -18,7 +18,15 @@ def home():
 @app.route('/api/v1/transcript', methods=['GET'])
 def transcript():
     transcript = ""
-    for words in y["words"]:
+    if 'id' in request.args:
+        id = str(request.args['id'])
+    else:
+        return "Error: No id field provided. Please specify a transcript id"
+    file = open(id, "r")
+    text = file.read()
+    textJson = json.loads(g)
+                              
+    for words in textJson["words"]:
         transcript += words["word"] + " "
     return jsonify(transcript)
 

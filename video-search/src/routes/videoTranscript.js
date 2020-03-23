@@ -24,8 +24,9 @@ export default class VideoTranscript extends Component {
         super(props)
         this.vidPlayer = null;
         this.state = {
-            keyword: '', // keyword searche
-            playing: false
+            keyword: '', // keyword search
+            playing: false,
+            loading: true,
         }
         this.changeKeyword = this.changeKeyword.bind(this);
     }
@@ -76,6 +77,7 @@ export default class VideoTranscript extends Component {
                     mediaType={"video"}
                     />
                 </section>
+                }
             </TranscriptBase>
         )
     }

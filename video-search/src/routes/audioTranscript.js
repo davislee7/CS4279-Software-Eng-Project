@@ -3,6 +3,7 @@ import styled from "styled-components"
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import TranscriptTextBox from '../components/TranscriptTextBox'
+import Loader from "react-spinners/ClipLoader";
 
 const TranscriptBase = styled.div`
     text-align: center;
@@ -16,9 +17,11 @@ export default class AudioTranscript extends Component {
         super(props)
         this.state = {
             keyword: '', // keyword searched
-            playing: false
+            playing: false,
+            loading: true,
         }
         this.changeKeyword = this.changeKeyword.bind(this);
+        this.stopLoadSpinning = this.stopLoadSpinning.bind(this);
     }
 
     changeKeyword(event) {
@@ -40,6 +43,12 @@ export default class AudioTranscript extends Component {
         }
     }
 
+    stopLoadSpinning() {
+        this.setState({
+            loading: false
+        });
+     }
+
     ref = player => {
         this.player = player
       }
@@ -60,19 +69,38 @@ export default class AudioTranscript extends Component {
                 </section>
 
                 <section style={{marginTop: "25px"}}>
+                    <Loader
+                        size={327}
+                        color={"#006600"}
+                        loading={this.state.loading}
+                    />
+                </section>
+
+                <section style={{marginTop: "25px"}}>
                     <AudioPlayer
                     fullPlayer
                     style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
                     src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
                     onPlay={e => console.log("onPlay")}
                     ref={this.ref}
-                    playing={this.state.playing}/>
+                    playing={this.state.playing}
+                    onCanPlay={this.stopLoadSpinning}/>
                 </section>
 
+                { this.state.loading ? 
+                <section style={{marginTop: "25px"}}>
+                    <Loader
+                        size={327}
+                        color={"#006600"}
+                        loading={this.state.loading}
+                    />
+                </section>
+                :
                 <section style={{marginTop: "25px"}}>
                     <h1>Transcript</h1>
                     <TranscriptTextBox/>
                 </section>
+                }
 
 
             </TranscriptBase>

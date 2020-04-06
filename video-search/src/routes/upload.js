@@ -22,6 +22,7 @@ export default class Upload extends Component {
 
     // set file
     setFile(newFile) {
+        console.log(newFile)
         this.setState({
             file: newFile
         })
@@ -29,11 +30,30 @@ export default class Upload extends Component {
 
     // set nextPage to true (display new page)
     pushToNextPage() {
-        if (this.state.file[0].type === "audio/mp3") {
-            this.props.history.push("/audio")
-        } else {
-            this.props.history.push("/video")
+        if (this.state.file != null && this.state.file.length > 0) {
+            const file = this.state.file[0]
+            let formData = new FormData();
+            formData.append("uploadedFile", file)
+            fetch("/api/v1/upload", {
+                method: "POST",
+                body: formData
+            }).then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response.json();
+            }).then((data) => {
+                console.log("Success");
+            }).catch(e => {
+                console.log("ERROR: ", e)
+            })
         }
+
+        // if (this.state.file[0].type === "audio/mp3") {
+        //     this.props.history.push("/audio")
+        // } else {
+        //     this.props.history.push("/video")
+        // }
     }
 
     render() {

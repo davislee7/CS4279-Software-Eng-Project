@@ -35,9 +35,7 @@ class FileDropWithButton extends Component
             buttonDisabled: false,
             uploadedFile: file,
             message: "Success",
-        }, 
-        () => {console.log(this.state.uploadedFile)});
-
+        });
         // call the method in App to update file
         this.props.updateFile(file);
     }

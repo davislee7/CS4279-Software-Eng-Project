@@ -1,6 +1,7 @@
 import flask
 from flask import request, jsonify
 import json
+from werkzeug.datastructures import FileStorage
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -9,10 +10,18 @@ f = open("stanfordtest.json", "r")
 g = f.read()
 y = json.loads(g)
 
+
 @app.route('/', methods=['GET'])
 def home():
     return '''<h1>Distant Reading Archive</h1>
 <p>A prototype API for transcript and keyword search.</p>'''
+
+
+@app.route('/api/v1/upload', methods=['POST'])
+def upload():
+    file = request.files['uploadedFile']
+    io = file.read()
+    return "{}"
 
 
 @app.route('/api/v1/transcript', methods=['GET'])

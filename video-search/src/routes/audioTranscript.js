@@ -4,6 +4,7 @@ import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import TranscriptTextBox from '../components/TranscriptTextBox'
 import Loader from "react-spinners/ClipLoader";
+import Logo from "../components/Logo"
 
 const TranscriptBase = styled.div`
     text-align: center;
@@ -57,9 +58,7 @@ export default class AudioTranscript extends Component {
         console.log("RENDER")
         return (
             <TranscriptBase>
-                <section>
-                    <img src="logo.png"></img>
-                </section>
+                <Logo></Logo>
 
                 <section style={{marginTop: "25px"}}>
                     <input type="text"

@@ -1,7 +1,9 @@
 import flask
-from flask import request, jsonify
+import os
 import json
-from werkzeug.datastructures import FileStorage
+from flask import request, jsonify
+from werkzeug.utils import secure_filename
+from pathlib import Path
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -16,11 +18,15 @@ def home():
     return '''<h1>Distant Reading Archive</h1>
 <p>A prototype API for transcript and keyword search.</p>'''
 
+# TODO: Change this maybe? Right now it saves in current folder
+DIRECTORY = Path(__file__).parent.absolute()
 
 @app.route('/api/v1/upload', methods=['POST'])
 def upload():
     file = request.files['uploadedFile']
-    io = file.read()
+    if file:
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(DIRECTORY, filename))
     return "{}"
 
 

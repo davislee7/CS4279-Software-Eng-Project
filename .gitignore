@@ -1,2 +1,4 @@
 .idea/
 venv/
+Backend/audio/
+Backend/deepspeech-0.6.1-models/

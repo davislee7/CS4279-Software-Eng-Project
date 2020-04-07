@@ -4,6 +4,7 @@ import json
 from flask import request, jsonify
 from werkzeug.utils import secure_filename
 from pathlib import Path
+import subprocess
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -26,7 +27,25 @@ def upload():
     file = request.files['uploadedFile']
     if file:
         filename = secure_filename(file.filename)
+        print(filename)
         file.save(os.path.join(DIRECTORY, filename))
+
+    # subprocess.run(['source', '$HOME/tmp/deepspeech-venv/bin/activate'],
+    #                 stdout=subprocess.PIPE,
+    #                 universal_newlines=True)
+    deepspeechString = "deepspeech "
+    deepspeechModel = "--model deepspeech-0.6.1-models/output_graph.pbmm "
+    deepspeechAudio = "--audio "
+    deepspeechAudio += filename
+    deepspeechString += deepspeechModel
+    deepspeechString += deepspeechAudio
+    deepspeechString += " --json > "
+    deepspeechString += filename[:len(filename) - 4]
+    deepspeechString += ".json"
+    process = subprocess.run(deepspeechString,
+                             shell=True,
+                             universal_newlines=True)
+    print(process)
     return "{}"
 
 
@@ -39,8 +58,8 @@ def transcript():
         return "Error: No id field provided. Please specify a transcript id"
     file = open(id, "r")
     text = file.read()
-    textJson = json.loads(g)
-                              
+    textJson = json.loads(text)
+
     for words in textJson["words"]:
         transcript += words["word"] + " "
     return jsonify(transcript)
@@ -58,8 +77,10 @@ def keyword_search():
 
     # Create an empty list for our results
     jsondump = {"name": keyword, "timeStamps": []}
-
-    for words in y["words"]:
+    file = open(keyword, "r")
+    text = file.read()
+    textJson = json.loads(text)
+    for words in textJson["words"]:
         if words["word"] == keyword:
             jsondump["timeStamps"].append(words["start_time "])
 

@@ -46,7 +46,7 @@ def upload():
                              shell=True,
                              universal_newlines=True)
     print(process)
-    return jsonify(filename)
+    return jsonify(filename.split(".")[0])
 
 
 @app.route('/api/v1/transcript', methods=['GET'])
@@ -67,7 +67,6 @@ def transcript():
 
 @app.route('/api/v1/audio', methods=['GET'])
 def getAudio():
-    transcript = ""
     if 'id' in request.args:
         id = str(request.args['id'])
     else:

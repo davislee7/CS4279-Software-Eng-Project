@@ -10,7 +10,10 @@ import TranscriptEditor from "@bbc/react-transcript-editor";
 const TranscriptBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
-    height: auto;
+    min-height: 100vh;
+    height: 100%;
+    min-width: 100vw;
+    width: 100%;
 `
 
 export default class AudioTranscript extends Component {
@@ -20,10 +23,23 @@ export default class AudioTranscript extends Component {
         this.state = {
             keyword: '', // keyword searched
             playing: false,
-            loading: true,
+            isLoading: true,
+            transcript: null
         }
         this.changeKeyword = this.changeKeyword.bind(this);
-        this.stopLoadSpinning = this.stopLoadSpinning.bind(this);
+    }
+
+    async componentDidMount() {
+        try {
+            let response = await fetch(`/api/v1/transcript?id=${this.props.match.params.id}`)
+            let data = await response.json()
+            this.setState({
+                isLoading: false,
+                transcript: data
+            })
+        } catch(e) {
+
+        }
     }
 
     changeKeyword(event) {
@@ -34,26 +50,16 @@ export default class AudioTranscript extends Component {
                 console.log(this.state.keyword)
             })
 
-            if(this.state.keyword.match("demo test")){
-                if (this.player) {
-                    this.player.audio.currentTime = 45;
-                    this.setState({
-                        playing: true
-                    })
-                }
-            }
+            // if(this.state.keyword.match("demo test")){
+            //     if (this.player) {
+            //         this.player.audio.currentTime = 45;
+            //         this.setState({
+            //             playing: true
+            //         })
+            //     }
+            // }
         }
     }
-
-    stopLoadSpinning() {
-        this.setState({
-            loading: false
-        });
-     }
-
-    ref = player => {
-        this.player = player
-      }
 
     render() {
         return (
@@ -71,35 +77,9 @@ export default class AudioTranscript extends Component {
                     <Loader
                         size={327}
                         color={"#006600"}
-                        loading={this.state.loading}
+                        loading={this.state.isLoading}
                     />
                 </section>
-
-                <section style={{marginTop: "25px"}}>
-                    <AudioPlayer
-                    fullPlayer
-                    style={{width: "50vw", margin: "auto", backgroundColor: 'green'}}
-                    src="https://www.bensound.com/bensound-music/bensound-summer.mp3"
-                    onPlay={e => console.log("onPlay")}
-                    ref={this.ref}
-                    playing={this.state.playing}
-                    onCanPlay={this.stopLoadSpinning}/>
-                </section>
-
-                { this.state.loading ? 
-                <section style={{marginTop: "25px"}}>
-                    <Loader
-                        size={327}
-                        color={"#006600"}
-                        loading={this.state.loading}
-                    />
-                </section>
-                :
-                <section style={{marginTop: "25px"}}>
-                    <h1>Transcript</h1>
-                    <TranscriptTextBox/>
-                </section>
-                }
 
 
             </TranscriptBase>

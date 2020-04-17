@@ -5,6 +5,7 @@ import 'react-h5-audio-player/lib/styles.css';
 import TranscriptTextBox from '../components/TranscriptTextBox'
 import Loader from "react-spinners/ClipLoader";
 import Logo from "../components/Logo"
+import TranscriptEditor from "@bbc/react-transcript-editor";
 
 const TranscriptBase = styled.div`
     text-align: center;
@@ -55,7 +56,6 @@ export default class AudioTranscript extends Component {
       }
 
     render() {
-        console.log("RENDER")
         return (
             <TranscriptBase>
                 <Logo></Logo>

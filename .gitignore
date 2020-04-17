@@ -1,4 +1,7 @@
+.DS_Store
 .idea/
 venv/
 Backend/audio/
 Backend/deepspeech-0.6.1-models/
+Backend/audio-0.6.1.tar.gz
+Backend/deepspeech-0.6.1-models.tar.gz

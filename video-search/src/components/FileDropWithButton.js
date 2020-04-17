@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Dropzone from 'react-dropzone'
 import styled from "styled-components"
 
+const DropBase = styled.div`
+    user-select: none;
+`
+
 const CustomDropzone = styled.p`
     background-color: #F5F5F5;
     color: gray;
@@ -51,12 +55,12 @@ class FileDropWithButton extends Component
     render()
     {
         return (
-            <div >
+            <DropBase>
                 <section style={{display: 'flex',  justifyContent: 'center', alignItems: 'center', borderRadius: '25px'}}>
                     <Dropzone 
                         onDropAccepted={acceptedFiles => this.fileUploadSuceed(acceptedFiles)}
                         onDropRejected={() => this.fileUploadFailed()}
-                        accept={['audio/x-m4a', 'audio/mp3', 'audio/wav']}>
+                        accept={['audio/wav']}>
                     {({getRootProps, getInputProps}) => (
                         <section>
                         <div {...getRootProps()} >
@@ -71,7 +75,7 @@ class FileDropWithButton extends Component
                 <section>
                     {this.state.message === "Success" ? <p style={{color: 'green', fontSize: '20px'}}>You have successfully uploaded a file!</p>
                         : this.state.message === "Failed" ? <p style={{color: 'red', fontSize: '20px'}}>File has failed to upload (Must be an audio or video file)</p> 
-                        : <p style={{color: 'white', fontSize: '20px'}}>.</p>}
+                        : <p style={{color: 'white', fontSize: '20px'}}></p>}
                 </section>
 
                 <section>
@@ -80,7 +84,7 @@ class FileDropWithButton extends Component
                         disabled={this.state.buttonDisabled}
                         onClick={() => this.buttonClicked()}>Continue</button>
                 </section>
-            </div>
+            </DropBase>
         )
     }
 }

@@ -3,10 +3,15 @@ import styled from "styled-components"
 import FileDropWithButton from "../components/FileDropWithButton"
 import Logo from "../components/Logo"
 
+import LoadingModal from "../components/loadingModal"
+
 const UploadBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
+    min-width: 100vw;
+    width: 100%;
 `
 
 export default class Upload extends Component {
@@ -14,7 +19,8 @@ export default class Upload extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            file: null
+            file: null,
+            isLoading: false
         }
   
         this.setFile = this.setFile.bind(this);
@@ -30,8 +36,11 @@ export default class Upload extends Component {
     }
 
     // set nextPage to true (display new page)
-    pushToNextPage() {
+    async pushToNextPage() {
         if (this.state.file != null && this.state.file.length > 0) {
+            this.setState({
+                isLoading: true
+            })
             const file = this.state.file[0]
             let formData = new FormData();
             formData.append("uploadedFile", file)
@@ -45,8 +54,13 @@ export default class Upload extends Component {
                 return response.json();
             }).then((data) => {
                 console.log("Success");
+                this.setState({
+                    isLoading: false
+                })
+                this.props.history.push("/audio/" + data)
             }).catch(e => {
                 console.log("ERROR: ", e)
+                // TODO: Handle error case
             })
         }
 
@@ -60,6 +74,7 @@ export default class Upload extends Component {
     render() {
         return (
             <UploadBase>
+                { this.state.isLoading ? <LoadingModal></LoadingModal> : null }
                 <Logo></Logo>
             
                 <section>

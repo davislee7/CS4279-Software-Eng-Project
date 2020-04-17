@@ -7,6 +7,7 @@ import VideoTranscript from "./routes/videoTranscript"
 
 const Base = styled.div`
   height: 100%;
+  min-height: 100vh;
 `
 
 class App extends Component {
@@ -17,9 +18,9 @@ class App extends Component {
         <Base>
           <Route exact path="/"
             render={props => <Upload {...props}/>}/>
-          <Route path="/audio"
+          <Route path="/audio/:id"
             render={props => <AudioTranscript {...props}/>}/>
-          <Route path="/video"
+          <Route path="/video/:id"
             render={props => <VideoTranscript {...props}/>}/>
         </Base>
       </BrowserRouter>

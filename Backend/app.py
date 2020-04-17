@@ -1,7 +1,7 @@
 import flask
 import os
 import json
-from flask import request, jsonify, send_from_directory
+from flask import request, jsonify, send_from_directory, abort
 from werkzeug.utils import secure_filename
 from pathlib import Path
 import subprocess
@@ -46,7 +46,7 @@ def upload():
                              shell=True,
                              universal_newlines=True)
     print(process)
-    return jsonify(filename.split(".")[0])
+    return jsonify(filename)
 
 
 @app.route('/api/v1/transcript', methods=['GET'])
@@ -56,6 +56,7 @@ def transcript():
         id = str(request.args['id'])
     else:
         return "Error: No id field provided. Please specify a transcript id"
+    id = id.split('.')[0]
     file = open(id + ".json", "r")
     text = file.read()
     textJson = json.loads(text)
@@ -74,7 +75,7 @@ def getAudio():
     try:
         return send_from_directory(DIRECTORY, filename=id)
     except FileNotFoundError:
-        return "Error: File not found"
+        abort(404)
 
 
 @app.route('/api/v1/keywordsearch', methods=['GET'])

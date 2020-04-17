@@ -7,6 +7,8 @@ import Loader from "react-spinners/ClipLoader";
 import Logo from "../components/Logo"
 import TranscriptEditor from "@bbc/react-transcript-editor";
 
+import DEMO_TRANSCRIPT from "../sample-data/demo.json";
+
 const TranscriptBase = styled.div`
     text-align: center;
     background-color: #e6ffe6;
@@ -38,7 +40,7 @@ export default class AudioTranscript extends Component {
                 transcript: data
             })
         } catch(e) {
-
+            console.log("FAILED")
         }
     }
 
@@ -65,23 +67,35 @@ export default class AudioTranscript extends Component {
         return (
             <TranscriptBase>
                 <Logo></Logo>
-
-                <section style={{marginTop: "25px"}}>
-                    <input type="text"
-                    style={{height: "5vh", fontSize: '24px', borderRadius: '25px', paddingLeft: '25px', paddingRight: '25px'}}
-                    placeholder="Search..."
-                    onKeyPress={this.changeKeyword}></input>
-                </section>
-
+                {this.state.isLoading ? 
                 <section style={{marginTop: "25px"}}>
                     <Loader
                         size={327}
                         color={"#006600"}
-                        loading={this.state.isLoading}
+                        loading={true}
                     />
-                </section>
-
-
+                </section> : 
+                <div>
+                    <section style={{marginTop: "25px"}}>
+                        <input type="text"
+                        style={{height: "5vh", fontSize: '24px', borderRadius: '25px', paddingLeft: '25px', paddingRight: '25px'}}
+                        placeholder="Search..."
+                        onKeyPress={this.changeKeyword}></input>
+                    </section>
+                    
+                    <section style={{marginTop: "25px"}}>
+                        <TranscriptEditor
+                            transcriptData={DEMO_TRANSCRIPT}
+                            mediaUrl={`/api/v1/audio?id=${this.props.match.params.id}`}
+                            isEditable={false}
+                            spellCheck={false}
+                            sttJsonType={"bbckaldi"}
+                            title={this.props.match.params.id}
+                            mediaType={"audio"}
+                            />
+                    </section>
+                </div>
+                }
             </TranscriptBase>
         )
     }

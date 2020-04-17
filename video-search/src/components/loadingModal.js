@@ -30,10 +30,6 @@ const LoadingBase = styled.div`
 `
 
 export default class LoadingModal extends Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <Overlay>

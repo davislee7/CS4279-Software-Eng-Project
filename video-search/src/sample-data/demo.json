@@ -2,7 +2,6 @@
 	"action": "audio-transcribe",
 	"retval": {
 		"status": true,
-		"wonid": "octo:2692ea33-d595-41d8-bfd5-aa7f2d2f89ee",
 		"punct": "your power is sufficient i said",
 		"words": [
             {
@@ -61,7 +60,7 @@
 			"@type": "AudioFile",
 			"speakers": [
                 {
-					"@id": "S0",
+					"@id": "Speaker",
 					"gender": "M"
 				}
             ],

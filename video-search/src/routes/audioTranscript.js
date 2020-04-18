@@ -39,6 +39,7 @@ export default class AudioTranscript extends Component {
                 isLoading: false,
                 transcript: data
             })
+            console.log(data)
         } catch(e) {
             console.log("FAILED")
         }
@@ -85,7 +86,7 @@ export default class AudioTranscript extends Component {
                     
                     <section style={{marginTop: "25px"}}>
                         <TranscriptEditor
-                            transcriptData={DEMO_TRANSCRIPT}
+                            transcriptData={this.state.transcript}
                             mediaUrl={`/api/v1/audio?id=${this.props.match.params.id}`}
                             isEditable={false}
                             spellCheck={false}

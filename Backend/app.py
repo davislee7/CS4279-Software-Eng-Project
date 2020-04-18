@@ -1,3 +1,5 @@
+import time
+
 import flask
 import os
 import json
@@ -19,8 +21,10 @@ def home():
     return '''<h1>Distant Reading Archive</h1>
 <p>A prototype API for transcript and keyword search.</p>'''
 
+
 # TODO: Change this maybe? Right now it saves in current folder
 DIRECTORY = Path(__file__).parent.absolute()
+
 
 @app.route('/api/v1/upload', methods=['POST'])
 def upload():
@@ -46,12 +50,15 @@ def upload():
                              shell=True,
                              universal_newlines=True)
     print(process)
+    # newFile = str(DIRECTORY) + "/" + filename[:len(filename) - 4] + ".json"
+    # while not os.path.exists(newFile):
+    #     print(newFile)
+    #     time.sleep(1)
     return jsonify(filename)
 
 
 @app.route('/api/v1/transcript', methods=['GET'])
 def transcript():
-    transcript = ""
     if 'id' in request.args:
         id = str(request.args['id'])
     else:
@@ -61,9 +68,60 @@ def transcript():
     text = file.read()
     textJson = json.loads(text)
 
-    for words in textJson["words"]:
-        transcript += words["word"] + " "
-    return jsonify(textJson)
+    tscript = []
+    words = []
+    totalTime = 0
+
+    result = {
+        "action": "audio-transcribe"
+    }
+
+    retval = dict()
+    retval["status"] = True
+
+    for index, word in enumerate(textJson["words"]):
+        tscript.append(word["word"] + " ")
+        item = {
+            "start": word["start_time "],
+            "confidence": 1.0,
+            "end": word["start_time "] + word["duration"],
+            "word": word["word"],
+            "punct": word["word"],
+            "index": index
+        }
+        totalTime = word["start_time "] + word["duration"]
+        words.append(item)
+
+    segmentation = {
+        "metadata": {
+            "version": "0.0.10"
+        },
+        "@type": "AudioFile",
+        "speakers": [
+            {
+                "@id": "Speaker",
+                "gender": "M"
+            }
+        ],
+        "segments": [
+            {
+                "@type": "Segment",
+                "start": 0,
+                "duration": totalTime,
+                "bandwidth": "S",
+                "speaker": {
+                    "@id": "S0",
+                    "gender": "M"
+                }
+            }
+        ]
+    }
+    retval["punct"] = "".join(tscript)
+    retval["words"] = words
+    retval["segmentation"] = segmentation
+    result["retval"] = retval
+
+    return jsonify(result)
 
 
 @app.route('/api/v1/audio', methods=['GET'])

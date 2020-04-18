@@ -25,3 +25,29 @@ Now we're ready to run
 ```
 python app.py
 ```
+
+## DeepSpeech setup for Windows 😊
+
+**1. Download Windows Subsystem for Linux**
+![Microsoft Store](/images/Store.png)
+
+**2. Run the Ubuntu App and cd into our directory**
+![WSL](/images/WSL.png)
+
+**3. Setup Python for Ubuntu**
+* Check if Python3 is installed with `python3 --version`
+* Install pip with `sudo apt install python3-pip`
+* Install venv with `sudo apt install python3-venv`
+
+[Link here for more info](https://docs.microsoft.com/en-us/windows/python/web-frameworks#install-python-pip-and-venv)
+
+* Create the virtual environment with `python3 -m venv .venv`
+* Set the source with `source .venv/bin/activate`
+
+[Look here for info on creating a virtual environment](https://docs.microsoft.com/en-us/windows/python/web-frameworks#create-a-virtual-environment)
+
+**4. Install packages**
+* Try to install flask with `pip3 install flask`
+* Try to install deepspeech with `pip3 install deepspeech`
+
+**5. Follow the rest of the instructions up top**

@@ -11,10 +11,6 @@ import subprocess
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-f = open("stanfordtest.json", "r")
-g = f.read()
-y = json.loads(g)
-
 
 @app.route('/', methods=['GET'])
 def home():
